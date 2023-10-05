@@ -1,4 +1,5 @@
 import json
+import pandas as pd
 
 # Read the contents of the "tak_users.txt" file
 with open("tak_users.txt", "r") as file:
@@ -16,10 +17,18 @@ for entry in data:
     usernames.append(entry["username"])
     passwords.append(entry["password"])
 
-# Create and open an output file in write mode
-with open("output.txt", "w") as output_file:
-    # Write the usernames and passwords to the file
-    for username, password in zip(usernames, passwords):
-        output_file.write(f"Username: {username}, Password: {password}\n")
+# Create a DataFrame from the extracted data
+df = pd.DataFrame({'Username': usernames, 'Password': passwords})
 
-print("Usernames and passwords have been exported to 'output.txt'")
+#Output the DataFrame to a CSV file
+df.to_csv("output.csv", index=False)
+
+print("Usernames and passwords have been exported to 'output.csv'")
+
+# Create and open an output file in write mode
+#with open("output.txt", "w") as output_file:
+    # Write the usernames and passwords to the file
+#    for username, password in zip(usernames, passwords):
+#        output_file.write(f"Username: {username}, Password: {password}\n")
+
+#print("Usernames and passwords have been exported to 'output.txt'")
